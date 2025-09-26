@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat AI</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f1f1f1;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        .chat-box {
+            overflow-y: scroll;
+            max-height: 300px;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+        }
+
+        .chat-box p {
+            margin: 5px 0;
+        }
+
+        .input-box {
+            display: flex;
+        }
+
+        .input-box input[type="text"] {
+            flex: 1;
+            padding: 5px;
+            border-radius: 3px;
+            border: 1px solid #ddd;
+        }
+
+        .input-box input[type="submit"] {
+            padding: 5px 10px;
+            margin-left: 5px;
+            border: none;
+            border-radius: 3px;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="chat-box" id="chat-box">
+            <p>Welcome! How can I help you today?</p>
+        </div>
+        <form id="chat-form" onsubmit="sendMessage(event)">
+            <div class="input-box">
+                <input type="text" id="message-input" placeholder="Type your message...">
+                <input type="submit" value="Send">
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function sendMessage(event) {
+            event.preventDefault();
+            const messageInput = document.getElementById('message-input');
+            const message = messageInput.value.trim();
+
+            if (message === '') {
+                return;
+            }
+
+            addMessage('user', message);
+            messageInput.value = '';
+
+            // Call your AI or respond here
+            setTimeout(() => {
+                addMessage('ai', 'I am just a demo, but in a real chat AI, I would respond appropriately!');
+            }, 500);
+        }
+
+        function addMessage(sender, message) {
+            const chatBox = document.getElementById('chat-box');
+            const newMessage = document.createElement('p');
+            newMessage.textContent = `${sender}: ${message}`;
+            chatBox.appendChild(newMessage);
+            chatBox.scrollTop = chatBox.scrollHeight; // Scroll to bottom
+        }
+    </script>
+</body>
+
+</html>
